@@ -1,0 +1,53 @@
+  <h2><%= @item.title %></h2>
+
+  <i>Description:</i>
+<p><%= @item.description %></p>
+
+
+<p><%= @item.gender.name_gender %> <i> Возраст: </i><%= @item.age %> <i>, Категория: </i><%= @item.category.name_cat %></p>
+
+<hr>
+
+<%# if current_user != nil %>
+  <h3><%= 'Leave your feedback for this item' %></h3>
+  <%#= form_for([@item, @item.reviews.build]) do |f| %>
+    <p><%#= f.text_area :msg %></p>
+    <p><%#= f.submit 'Create feedback' %></p>
+  <%# end %>
+
+  <%# else %>
+  <%#= link_to 'Sign in for leave your feedback', new_user_session_path, method: :get %>
+<%# end %>
+
+<h3>Feedbacks</h3>
+<%# @item.reviews.each do |review| %>
+
+<%# if review.id != nil %>
+  <p><%#= review.msg %><br/>
+  <i><b>
+  <%#= ( (review.user.name != "") ? review.user.name : review.user.email ) if review.user %>
+  </b></i></p>
+  <p>
+  <%# if (current_user != nil)&&(current_user.is_admin == true) %>
+    <%#= link_to 'Delete review', [review.item, review],
+                 method:  :delete,
+                 data: { confirm: 'Are you sure?' } %>
+  <%# end %>    
+  </p>
+<%# end %>
+
+
+<%# end %>
+
+<br/>
+<%= link_to 'Back to item list', items_path %>
+<p>or</p>
+<%# if (current_user != nil)&&(current_user.is_admin == true) %>
+  <%= link_to 'Edit', edit_item_path(@item) %>
+  <%= link_to 'Delete', item_path(@item),
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+  <%# else %>
+  <%#= link_to 'Sign in as Admin for delete and edit the item', new_user_session_path, method: :get %>
+<%# end %>
+

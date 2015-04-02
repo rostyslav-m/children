@@ -1,0 +1,39 @@
+<h2>Complete list of items</h2>
+<br/>
+
+  <table cols="3"  >
+    <tr>
+      <th width="60%" align="center"> Title</th>
+      <th width="40px" > Age </th>
+      <th width="100px" > Created at </th>
+      <th width="80px" > Cetegory </th>
+      <th width="60px" > Genders </th>
+      <th width="40px" ></th>
+      <th width="40px" ></th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to item.title, item_path(item) %></td>
+
+        <td align="center"><%= item.age if item.age %></td>
+        <td align="center"><%= item.created_at.strftime("%-d/%m/%Y") %></td>
+        <td align="center"><%= item.category.name_cat if item.category %></td>
+        <td align="center"><%= item.gender.name_gender if item.gender %></td>
+        <td align="center"><%#= item.reviews.count %></td>
+        <%# if (current_user != nil)&&(current_user.is_admin == true) %>
+          <td><%= link_to 'Edit', edit_item_path(item) %></td>
+          <td><%= link_to 'Destroy', item_path(item),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+        <%# end %>    
+      </tr>
+    <% end %>
+  </table>
+
+<br/>
+
+<div style="text-indent: 30px; font-size: 120%; font-weight: bold;">
+  <%# if (current_user != nil)&&(current_user.is_admin == true) %>
+    <%= link_to 'Add new item', new_item_path %>
+  <%# end %>
+</div>

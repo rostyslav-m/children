@@ -1,0 +1,46 @@
+<h1>Edit item</h1>
+
+<%= simple_form_for :item, url: item_path(@item), method: :patch do |f| %>
+
+  <% if @item.errors.any? %>
+    <dif id="error_explanation">
+      <h2>
+        <%= pluralize(@item.errors.count, "error") %> prohibited
+        this item from being saved:
+      </h2>
+      <ul>
+        <% @item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+
+<br/>
+    <p>
+      <%#= f.association :category, collecion: Category.all, prompt: "Choose a category" %>
+    </p>
+<br/>
+<br/>
+    <p>
+      <%#= f.association :gender, collecion: Gender.all, prompt: "Choose a gender" %>
+    </p>
+<br/>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<br/>
+<%= link_to 'Back', items_path %>

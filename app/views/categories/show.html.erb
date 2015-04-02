@@ -1,0 +1,9 @@
+<i>Category</i>
+
+  <h1><%= @category.name_cat %></h1>
+
+<% @category.items.each do |item| %>
+  <li><%= link_to item.title, item_path(item) %></li>
+  
+<% end %>
+

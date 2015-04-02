@@ -1,0 +1,20 @@
+<h1>Genders</h1>
+
+<table cols="3"  >
+   <tr>
+     <th width=80%></th>
+     <th width="40px" ></th>
+     <th width="40px" ></th>
+   </tr>
+  <% @genders.each do |gender| %>
+      <tr>
+        <td><%= link_to gender.name_gender, gender_path(gender) %></td>
+        <%# if (current_user != nil)&&(current_user.is_admin == true) %>
+          <td><%= link_to 'Edit', edit_gender_path(gender) %></td>
+          <td><%= link_to 'Destroy', gender_path(gender),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' } %></td>
+        <%# end %>
+      </tr>
+  <% end %>
+</table>

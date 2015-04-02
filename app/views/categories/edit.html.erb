@@ -1,0 +1,32 @@
+<h1>Edit category</h1>
+
+<%= form_for :category, url: category_path(@category), method: :patch do |f| %>
+
+    <% if @category.errors.any? %>
+        <dif id="error_explanation">
+          <h2>
+            <%= pluralize(@category.errors.count, "error") %> prohibited
+            this categoty from being saved:
+          </h2>
+          <ul>
+            <% @category.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+          </dif>
+    <% end %>
+
+    <p>
+      <%= f.label :name_cat %><br>
+      <%= f.text_field :name_cat %>
+    </p>
+
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
+
+<br/>
+<%= link_to 'Back', categories_path %>
+
