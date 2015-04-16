@@ -1,9 +1,6 @@
 <h2><%= link_to 'Complete list of items', items_path %></h2>
 <br/>
 
-
-
-<%#= search_form_for @search do |f|  %>
 <%= search_form_for @search, url: search_items_path, method: :post do |f|  %>
 
   <div class="field">
@@ -17,16 +14,10 @@
     <br />
     <%#= f.label :category %>
     <%= f.collection_check_boxes :category_id_eq_any, Category.order(:name_cat), :id, :name_cat %>
-
-
     
   </div>
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
-
-
-
-
 
   <table cols="3"  >
     <tr>
@@ -62,7 +53,6 @@
 <%= will_paginate @styles %>
 
 <br />
-
 
 <div style="text-indent: 30px; font-size: 120%; font-weight: bold;">
   <%# if (current_user != nil)&&(current_user.is_admin == true) %>
