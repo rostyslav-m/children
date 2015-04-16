@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 #  devise_for :users
   resources :items do
-    resources :feedbacks
+    collection { post :search, to: 'items#index' }
   end
 
   resources :categories

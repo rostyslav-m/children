@@ -1,5 +1,30 @@
-<h2>Complete list of items</h2>
+<h2><%= link_to 'Complete list of items', items_path %></h2>
 <br/>
+
+
+
+<%= search_form_for @search, url: search_items_path, method: :post do |f|  %>
+  <div class="field">
+    <%= f.label :title_or_description_cont %><br />
+    <%= f.text_field :title_or_description_cont %><br />
+    <%= f.label :age %>
+    <%= f.select :age_eq, [nil, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] %>
+    <br />
+    <%#= f.label :gender %>
+    <%= f.collection_check_boxes :gender_id_eq_any, Gender.order(:name_gender), :id, :name_gender %>
+    <br />
+    <%#= f.label :category %>
+    <%= f.collection_check_boxes :category_id_eq_any, Category.order(:name_cat), :id, :name_cat %>
+
+
+    
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
+<% end %>
+
+
+
+
 
   <table cols="3"  >
     <tr>
