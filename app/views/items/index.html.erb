@@ -3,7 +3,9 @@
 
 
 
+<%#= search_form_for @search do |f|  %>
 <%= search_form_for @search, url: search_items_path, method: :post do |f|  %>
+
   <div class="field">
     <%= f.label :title_or_description_cont %><br />
     <%= f.text_field :title_or_description_cont %><br />
@@ -56,6 +58,11 @@
   </table>
 
 <br/>
+
+<%= will_paginate @styles %>
+
+<br />
+
 
 <div style="text-indent: 30px; font-size: 120%; font-weight: bold;">
   <%# if (current_user != nil)&&(current_user.is_admin == true) %>

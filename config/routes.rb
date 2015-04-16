@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
 #  devise_for :users
+
   resources :items do
-    collection { post :search, to: 'items#index' }
+    collection do
+      match 'search' => 'items#index', :via => [:get, :post], :as => :search
+    end
   end
 
   resources :categories

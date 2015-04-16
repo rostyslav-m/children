@@ -4,10 +4,8 @@ class ItemsController < ApplicationController
 #  before_filter :user_admin,   only: [:new, :create, :edit, :update, :destroy]
 
   def index
-   # @items = Item.all
     @search = Item.search(params[:q])
-    @items = @search.result
-   # @search.build_condition
+    @items = @search.result(:distinct => true).paginate(:page => params[:page], :per_page => 5)
   end
 
   def show
