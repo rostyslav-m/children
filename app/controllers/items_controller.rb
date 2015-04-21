@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
 
-  before_filter :find_item, only: [:show, :edit, :update, :destroy]
-#  before_filter :user_admin,   only: [:new, :create, :edit, :update, :destroy]
+  before_filter :find_item,          only: [:show, :edit, :update, :destroy]
+#  before_filter :user_can_update,    only: [:edit, :update, :destroy]
+#  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+#  before_filter :user_can_create,    only: [:new, :create]
 
   def index
     @search = Item.search(params[:q])
@@ -19,6 +21,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.user = current_user
 
     if @item.save
       redirect_to @item
@@ -28,21 +31,29 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
-      redirect_to @item
+    if ( current_user && ((current_user.is_admin == true)||(current_user == @item.user)))
+      if @item.update(item_params)
+        redirect_to @item
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      redirect_to items_path
     end
   end
 
   def destroy
-    @item.destroy
-    redirect_to action: "index"
+    if ((current_user.is_admin == true)||(current_user == @item.user))
+      @item.destroy
+      redirect_to action: "index"
+    else
+      redirect_to items_path
+    end
   end
 
   private
     def item_params
-      params.require(:item).permit(:title, :description, :category_id, :gender_id, :name_cat, :name_gender, :age)
+      params.require(:item).permit(:title, :description, :user_id, :category_id, :gender_id, :name_cat, :name_gender, :age)
     end
 
   private
@@ -51,8 +62,8 @@ class ItemsController < ApplicationController
     end
 
 #  private
-#    def user_admin
-#      redirect_to items_path if ((current_user == nil)||(current_user.is_admin == false))
+#    def user_can_update
+#      redirect_to items_path if ((current_user == nil)||(current_user.is_admin == false)||(current_user != @item.user))
 #    end
 
 end

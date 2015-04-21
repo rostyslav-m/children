@@ -4,6 +4,8 @@
 <p><%= @item.description %></p>
 
 
+<i>Author:</i>
+<p><%= @item.user ? @item.user.name : " " %></p>
 <p><%= @item.gender.name_gender %> <i> Возраст: </i><%= @item.age %> <i>, Категория: </i><%= @item.category.name_cat %></p>
 
 <hr>
@@ -42,12 +44,12 @@
 <br/>
 <%= link_to 'Back to item list', items_path %>
 <p>or</p>
-<%# if (current_user != nil)&&(current_user.is_admin == true) %>
+<% if (current_user != nil)&&((current_user.is_admin == true)||(current_user == @item.user)) %>
   <%= link_to 'Edit', edit_item_path(@item) %>
   <%= link_to 'Delete', item_path(@item),
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
-  <%# else %>
-  <%#= link_to 'Sign in as Admin for delete and edit the item', new_user_session_path, method: :get %>
-<%# end %>
+  <% else %>
+  <%= link_to 'Sign in as Author for delete and edit the item', new_user_session_path, method: :get %>
+<% end %>
 

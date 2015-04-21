@@ -29,6 +29,8 @@ gem 'ransack'
 
 gem 'will_paginate'
 
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

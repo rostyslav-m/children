@@ -37,13 +37,13 @@
         <td align="center"><%= item.created_at.strftime("%-d/%m/%Y") %></td>
         <td align="center"><%= item.category.name_cat if item.category %></td>
         <td align="center"><%= item.gender.name_gender if item.gender %></td>
-        <td align="center"><%#= item.reviews.count %></td>
-        <%# if (current_user != nil)&&(current_user.is_admin == true) %>
+        <td align="center"><%= item.user.name if item.user %></td>
+        <% if ((current_user != nil)&&(current_user.is_admin == true)) %>
           <td><%= link_to 'Edit', edit_item_path(item) %></td>
           <td><%= link_to 'Destroy', item_path(item),
                   method: :delete,
                   data: { confirm: 'Are you sure?' } %></td>
-        <%# end %>    
+        <% end %>
       </tr>
     <% end %>
   </table>
