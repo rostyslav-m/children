@@ -24,12 +24,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'simple_form'
-
 gem 'ransack'
-
 gem 'will_paginate'
-
 gem 'devise'
+gem 'twitter-bootstrap-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

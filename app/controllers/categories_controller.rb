@@ -3,6 +3,10 @@ class CategoriesController < ApplicationController
   before_filter :find_category, only: [:show, :edit, :update, :destroy]
 #  before_filter :user_admin,    only: [:new, :edit, :update, :destroy]
 
+
+
+
+
   def index
     @categories = Category.all
   end
@@ -45,6 +49,9 @@ class CategoriesController < ApplicationController
 #  def user_admin
 #    redirect_to items_path if ((current_user == nil)||(current_user.is_admin == false))
 #  end
+
+
+
 
   def find_category
     @category = Category.find(params[:id].to_i)

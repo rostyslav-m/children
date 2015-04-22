@@ -1,30 +1,28 @@
-<h2><%= link_to 'Complete list of items', items_path %></h2>
-<br/>
-
 <%= search_form_for @search, url: search_items_path, method: :post do |f|  %>
 
   <div class="field">
-    <%= f.label :title_or_description_cont %><br />
-    <%= f.text_field :title_or_description_cont %><br />
+    <%#= f.label :title_or_description_cont %><br />
+    <b>Search: </b>
+    <%= f.text_field :title_or_description_cont %>
     <%= f.label :age %>
     <%= f.select :age_eq, [nil, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] %>
+    <%= f.submit "Search" %>
     <br />
     <%#= f.label :gender %>
     <%= f.collection_check_boxes :gender_id_eq_any, Gender.order(:name_gender), :id, :name_gender %>
     <br />
     <%#= f.label :category %>
     <%= f.collection_check_boxes :category_id_eq_any, Category.order(:name_cat), :id, :name_cat %>
-    
   </div>
-  <div class="actions"><%= f.submit "Search" %></div>
-<% end %>
+  
 
+<% end %>
   <table cols="3"  >
     <tr>
-      <th width="60%" align="center"> Title</th>
-      <th width="40px" > Age </th>
-      <th width="100px" > Created at </th>
-      <th width="80px" > Cetegory </th>
+      <th width="40%" align="center"> Title</th>
+      <th width="50px" > Age </th>
+      <th width="120px" > Created at </th>
+      <th width="200px" > Cetegory </th>
       <th width="60px" > Genders </th>
       <th width="40px" ></th>
       <th width="40px" ></th>
@@ -34,7 +32,7 @@
         <td><%= link_to item.title, item_path(item) %></td>
 
         <td align="center"><%= item.age if item.age %></td>
-        <td align="center"><%= item.created_at.strftime("%-d/%m/%Y") %></td>
+        <td align="center"><%= item.created_at.strftime("%-d/%m/%y") %></td>
         <td align="center"><%= item.category.name_cat if item.category %></td>
         <td align="center"><%= item.gender.name_gender if item.gender %></td>
         <td align="center"><%= item.user.name if item.user %></td>

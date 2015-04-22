@@ -8,16 +8,70 @@
 </head>
 <body>
 
-<div id="user_nav">
-  <% if user_signed_in? %>
-    Signed in as <%= current_user.email %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-  <% end %>
-</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Child</a>
+    </div>
 
-<%= yield %>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav">
+        <li><a href="#">will be about...</a></li>
+      </ul>
+
+
+      <ul class="nav pull-right">   
+        <li>
+          <div id="user_nav">
+            <% if user_signed_in? %>
+            Signed in as <%= current_user.email %>. Not you?
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-danger btn-mini' %>
+            <% else %>
+            <%= link_to new_user_registration_path do %>
+            <button class="btn-mini btn btn-info">Sign Up</button>
+            <% end %>
+            or <%= link_to new_user_session_path do %>
+            <button class="btn btn-info btn-mini">Sign In</button>
+            <% end %>
+            <% end %>
+          </div>
+        </li> 
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-2">
+        <%= link_to 'Complete list of items', items_path %>
+        <br />
+        <% Category.all.each do |category| %>
+          <li><%= link_to category.name_cat, category_path(category) %></li>
+        <% end %>
+        <br />
+        <% Gender.all.each do |gender| %>
+          <li><%= link_to gender.name_gender, gender_path(gender) %></li>
+        <% end %>
+      </div>    
+      <div class="col-xs-8"><%= yield %></div>
+    </div>
+  </div>
 
 </body>
 </html>
