@@ -28,12 +28,11 @@
 
 <br/>
     <p>
-      <%#= f.association :category, collecion: Category.all, prompt: "Choose a category" %>
+      <%= f.collection_select :category_id, Category.all, :id, :name_cat %>
     </p>
 <br/>
-<br/>
     <p>
-      <%#= f.association :gender, collecion: Gender.all, prompt: "Choose a gender" %>
+      <%= f.collection_select :gender_id, Gender.all, :id, :name_gender %>
     </p>
 <br/>
 
